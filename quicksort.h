@@ -36,7 +36,7 @@ public:
 
 template <class T>
 Node<T>* partition(List<T> datos, Node<T>* L, Node<T>* R) {
-    Node<T> *i = NULL;
+    Node<T> *i =  nullptr;
     Node<T> *j = L;
 
     Node<T> *pivot = R;
@@ -45,7 +45,7 @@ Node<T>* partition(List<T> datos, Node<T>* L, Node<T>* R) {
 
     while ( j != R) {
         if (j->value <= pivot->value) {
-            if (i == NULL) {
+            if (i == nullptr) {
                 i = L;
             }else {
                 i = i->next;
@@ -58,7 +58,7 @@ Node<T>* partition(List<T> datos, Node<T>* L, Node<T>* R) {
         j = j->next;
     }
 
-    if (i == NULL) {
+    if (i == nullptr) {
         i = L;
     } else {
         i = i->next;
