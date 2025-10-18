@@ -86,6 +86,20 @@ void loadOrderData(const string& filename, List<Order>& out, int capacity) {
 
 }
 
+template <class T>
+Node<T>* encontrarRestaurante(string restaurante, List<T> lista) {
+    Node<T>* aux = lista.getFirst();
+    do {
+        if (aux->value.getRestaurant() == restaurante) {
+            return aux;
+        }
+        aux = aux->next;
+    }while (aux != lista.getFirst());
+
+    return nullptr;
+
+}
+
 
 
 #endif //SITUACION_PROBLEMA_PARTE_2_FUNCIONES_CARGAR_H
