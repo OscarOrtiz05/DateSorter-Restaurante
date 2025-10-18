@@ -99,11 +99,12 @@ public:
     friend ostream& operator<<(ostream& os, const Order& order){
 
       os << order.monthName() << " " << order.getDay() << " " << order.getHour() << ":" << order.getMin() << ":" << order.getSec()
-        << " R:" << order.getRestaurant() << "O:" << order.getName() << "(" << order.getNumber() << ")";
+        << " R:" << order.getRestaurant() << " O:" << order.getName() << "(" << order.getNumber() << ")";
 
       return os;
     }
 
 };
+
 
 #endif //SITUACION_PROBLEMA_PARTE_2_DATE_SORTER_H
