@@ -27,54 +27,54 @@ int monthToInt(string const &m){
 // - capacity: tamaño máximo del arreglo
 // - loaded (salida): cuántos elementos se cargaron realmente
 void loadOrderData(const string& filename, List<Order>& out, int capacity, int &loaded) {
-    ifstream file(filename);
-    string line;
     int i = 0;
+    string rest,sline,m,r,nm,n,d,h,min,s;
+    int index;
+    ifstream inFile2(filename);
+    if (inFile2.is_open()) {
+        // Extraer mes, d a, hora, minuto, segundo, restaurante, platillo y precio
+        while (getline(inFile2, sline) && i < capacity) {
+            string line = sline;
+            index = line.find(" ");
+            m = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(" ");
+            d = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(":");
+            h = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(":");
+            min = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(" ");
+            s = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(" O:");
+            r = line.substr(2, index - 2);
+            line = line.substr(index + 3);
+            index = line.find("(");
+            nm = line.substr(0, index);
+            line = line.substr(index + 1);
+            index = line.find(")");
+            n = line.substr(0, index);
 
-    while (getline(file, line)){
-        stringstream ss(line);
-        string s, min, hr, day, month, year, n, r, o, waste;
+           int _m = monthToInt(m);
+           int _d = stoi(d);
+           int _h = stoi(h);
+           int _min = stoi(min);
+           int _s = stoi(s);
+           int _n = stoi(n);
 
-        // obtiene cada elemento de la orden (tu mismo parseo)
-        getline(ss, month,' ');
-        getline(ss, day, ' ');
-        getline(ss, hr, ':');
-        getline(ss, min, ':');
-        getline(ss, s, ' ');
-        getline(ss, waste, ':');
-        getline(ss, r, 'O');
-        if (i == 345) {
-            cout << r << endl;
+            // Crear un objeto Order y guardarlo en el arreglo
+            auto order = Order(_s, _min, _h, _d, _m, _n, r, nm);
+            out.insertFirst(order);
+            i++;
         }
-        getline(ss, waste, ':');
-        getline(ss, o, '(');
-        getline(ss, n, ')');
-
-        if (i == 345) {
-            cout << r << endl;
-        }
-
-        // convierte strings a numeros
-        int _s   = stoi(s);
-        int _min = stoi(min);
-        int _hr  = stoi(hr);
-        int _day = stoi(day);
-        int _month = monthToInt(month);
-        int _n   = stoi(n);
-
-        // crea y guarda puntero
-
-        auto aux = Order(_s,_min,_hr,_day,_month,_n,r,o);
-        out.insertLast(aux);
-
-        if ( i == 345) {
-            cout << aux << endl;
-        }
-
-        ++i;
+        cout << "Registros procesados exitosamente: " << i << endl;
     }
-    file.close();
-    loaded = i;
+
+    inFile2.close();
 
 }
 
@@ -85,11 +85,6 @@ int main(){
     int loaded = 0;            // cuántos cargamos
 
     loadOrderData("orders.txt", _orders, n, loaded);
-
-    Order find = Order(8,53,18,1,1,277,"","Bratwurst con Chucrut");
-    int i = 0;
-    auto result = _orders.find(find,&i);
-    cout << result->value << endl;
 
     quicksort(_orders);
 
