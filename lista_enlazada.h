@@ -5,6 +5,9 @@
 #ifndef SITUACION_PROBLEMA_PARTE_2_LISTA_ENLAZADA_H
 #define SITUACION_PROBLEMA_PARTE_2_LISTA_ENLAZADA_H
 
+#include <iostream>
+using namespace std;
+
 // class node: un valor y un puntero a otro nodo
 template <class T>		//	Esta linea permite que podamos crear listas de cualquier tipo de dato
 class Node
@@ -20,8 +23,8 @@ class Node
 
 		Node( T valor )
 		{	this->value = valor;
-			this->prev = NULL;
-			this->next = NULL;
+			this->prev = nullptr;
+			this->next = nullptr;
 		}
 };
 
@@ -37,8 +40,8 @@ class List
 	public:
 		//	Que valores deberia tener la lista por default??
 		List()
-		{	this->first = NULL;
-			this->last = NULL;
+		{	this->first = nullptr;
+			this->last = nullptr;
 			this->size = 0;
 		}
 
@@ -145,9 +148,9 @@ Node<T>* List<T>::find( T value, int *index)
 		i++;
 	}
 
-	//Cambia el indice a -1 y regresa NULL si no se encontro el valor
+	//Cambia el indice a -1 y regresa nullptr si no se encontro el valor
 	*index = -1;
-	return NULL;
+	return nullptr;
 }
 
 
