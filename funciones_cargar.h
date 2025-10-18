@@ -79,7 +79,6 @@ void loadOrderData(const string& filename, List<Order>& out, int capacity) {
             out.insertFirst(order);
             i++;
         }
-        cout << "Registros procesados exitosamente: " << i << endl;
     }
 
     inFile2.close();
@@ -103,3 +102,4 @@ Node<T>* encontrarRestaurante(string restaurante, List<T> lista) {
 
 
 #endif //SITUACION_PROBLEMA_PARTE_2_FUNCIONES_CARGAR_H
+
